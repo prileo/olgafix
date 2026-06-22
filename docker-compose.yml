@@ -1,1 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: at_database_postgres
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - at_postgres_data:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
 
+volumes:
+  at_postgres_data:
